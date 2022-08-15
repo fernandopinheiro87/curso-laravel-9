@@ -8,17 +8,20 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    protected $model;
+
+    public function __construct(User $user)
+    {
+        $this->model = $user;
+    }
+
     public function index(Request $request){
 
 
 
         $search = $request->search;
-        $users = User::where(function($query) use ($search){
-            if($search){
-                $query->where('name','LIKE',"%{$search}%");
-                // $query->orWhere('email', $search);
-            }
-        })->get();
+        $users = $this->model->getUsers(search: $request->search ??'');
         //dd($users);
         
         //formas de passar variavel para a view
