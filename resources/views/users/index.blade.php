@@ -22,7 +22,14 @@
             
             <a href="{{route('users/show', $user->id)}}"> Ver usuario</a> |
             <a href="{{route('users/edit', $user->id)}}"> Editar usuario</a>
+            <a href="{{route('comments/index', $user->id)}}"> Ver comentários ({{$user->comments->count()}})</a>
         </li>
     @endforeach
 </ul>
+
+<div>
+    {{$users->appends([
+        'search' =>request()->get('search','')
+    ])->links()}}
+</div>
 @endsection

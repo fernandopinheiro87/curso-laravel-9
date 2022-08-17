@@ -48,8 +48,15 @@ class User extends Authenticatable
             if($search){
                 $query->where('name','LIKE',"%{$search}%");
             }
-        })->get();
+        })
+        //esse with tbm traz os comentasriso do usuario. Bom para fazer o count comment
+        ->with('comments')
+        ->paginate(1);
 
         return $users;
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 }
