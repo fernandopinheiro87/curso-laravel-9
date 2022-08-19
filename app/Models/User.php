@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
     ];
 
     /**
@@ -51,7 +52,7 @@ class User extends Authenticatable
         })
         //esse with tbm traz os comentasriso do usuario. Bom para fazer o count comment
         ->with('comments')
-        ->paginate(1);
+        ->paginate(10);
 
         return $users;
     }

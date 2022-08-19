@@ -17,6 +17,12 @@
 <ul>
     @foreach($users as $user)
         <li>
+            @if ($user->image)
+                <img src="{{url("storage/{$user->image}") }}" alt="{{$user->name}}"> -    
+            @else
+                <img src="{{url("favicon.ico") }}" alt="{{$user->name}}"> -   
+            @endif
+            
             {{ $user->name }} - 
             {{ $user->email }} |
             
@@ -27,7 +33,7 @@
     @endforeach
 </ul>
 
-<div>
+<div class="app">
     {{$users->appends([
         'search' =>request()->get('search','')
     ])->links()}}
